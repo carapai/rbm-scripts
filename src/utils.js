@@ -43,6 +43,7 @@ module.exports.processData = (dataSet, data) => {
         let p = {};
         f.dataElements.forEach(element => {
             if (element.mapping) {
+                console.log(element.mapping.value);
                 const foundData = data[element.mapping.value];
                 // console.log(foundData);
                 let groupedData = {};
@@ -61,7 +62,7 @@ module.exports.processData = (dataSet, data) => {
             }
         });
         data = p;
-        if (data) {
+        /*if (data) {
             f.categoryOptionCombos.forEach(coc => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
                     // console.log(dataElement);
@@ -79,7 +80,7 @@ module.exports.processData = (dataSet, data) => {
                     }
                 })
             });
-        }
+        }*/
     });
 
     return dataValues;
