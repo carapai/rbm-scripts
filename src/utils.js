@@ -64,20 +64,22 @@ module.exports.processData = (dataSet, data) => {
             f.categoryOptionCombos.forEach(coc => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
                     const values = data[dataElement];
-                    if (values) {
+                    console.log(values);
+                    console.log('The end');
+                    /*if (values) {
                         // _.forOwn(values, value => {
-                        const orgUnit = dataSetUnits[values['value']['orgUnit']];
+                        const orgUnit = dataSetUnits[data[dataElement]['value']['orgUnit']];
                         if (orgUnit) {
                             dataValues = [...dataValues, {
                                 dataElement,
-                                value: values['value']['value'],
-                                period: values['value']['period'],
+                                value: data[dataElement]['value']['value'],
+                                period: data[dataElement]['value']['period'],
                                 categoryOptionCombo: coc.id,
                                 orgUnit
                             }]
                         }
                         // });
-                    }
+                    }*/
                 })
             });
         }
