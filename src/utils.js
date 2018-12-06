@@ -69,29 +69,23 @@ module.exports.processData = (dataSet, data) => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
                     const values = data[dataElement];
                     if (values) {
-                        const filtered = values.filter(v => {
+                        values.filter(v => {
                             return v.categoryOptionCombo === mapping.value.toLocaleLowerCase();
+                        }).forEach(d => {
+                            if (d['orgUnit']) {
+                                const orgUnit = dataSetUnits[d['orgUnit']];
+                                if (orgUnit) {
+                                    dataValues = [...dataValues, {
+                                        dataElement,
+                                        value: d['value'],
+                                        period: d['period'],
+                                        categoryOptionCombo: coc.id,
+                                        orgUnit
+                                    }]
+                                }
+                            }
                         });
-
-                        console.log(JSON.stringify(filtered, null, 2));
-                        console.log('The end');
                     }
-
-
-                    /*if (values) {
-                        // _.forOwn(values, value => {
-                        const orgUnit = dataSetUnits[data[dataElement]['value']['orgUnit']];
-                        if (orgUnit) {
-                            dataValues = [...dataValues, {
-                                dataElement,
-                                value: data[dataElement]['value']['value'],
-                                period: data[dataElement]['value']['period'],
-                                categoryOptionCombo: coc.id,
-                                orgUnit
-                            }]
-                        }
-                        // });
-                    }*/
                 })
             });
         }
