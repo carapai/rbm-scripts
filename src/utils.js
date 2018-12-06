@@ -48,7 +48,6 @@ module.exports.processData = (dataSet, data) => {
                 let groupedData = {};
                 if (foundData) {
                     groupedData = _.fromPairs(foundData.map(d => {
-                        console.log(d);
                         return [d[dataSet.categoryOptionComboColumn.value], {
                             period: d[dataSet.periodColumn.value],
                             value: d[dataSet.dataValueColumn.value],
@@ -62,7 +61,7 @@ module.exports.processData = (dataSet, data) => {
             }
         });
         data = p;
-
+        console.log(JSON.stringify(data, null, 2));
         if (data) {
             f.categoryOptionCombos.forEach(coc => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
