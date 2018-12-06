@@ -67,7 +67,7 @@ module.exports.processData = (dataSet, data) => {
         if (data) {
             f.categoryOptionCombos.forEach(coc => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
-                    console.log(dataElement);
+                    console.log(mapping);
                     /*if (data[dataElement]) {
                         // const orgUnit = dataSetUnits[data[dataElement][mapping.value]['orgUnit']];
                         // if (orgUnit) {
