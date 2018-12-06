@@ -31,7 +31,6 @@ module.exports.processData = (dataSet, data) => {
     let dataValues = [];
     data = nest(data, [dataSet.dataElementColumn.value]);
 
-    console.log(JSON.stringify(data, null, 2));
 
     const dataSetUnits = _.fromPairs(dataSet.organisationUnits.map(o => {
         if (dataSet.orgUnitStrategy.value === 'name') {
@@ -47,6 +46,9 @@ module.exports.processData = (dataSet, data) => {
         f.dataElements.forEach(element => {
             if (element.mapping) {
                 const foundData = data[element.mapping.value];
+
+                console.log(JSON.stringify(foundData, null, 2));
+
                 let groupedData = {};
                 if (foundData) {
                     groupedData = _.fromPairs(foundData.map(d => {
