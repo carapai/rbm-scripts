@@ -67,19 +67,18 @@ module.exports.processData = (dataSet, data) => {
         if (data) {
             f.categoryOptionCombos.forEach(coc => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
-                    console.log(JSON.stringify(data[dataElement], null, 2));
-                    /*if (data[dataElement]) {
+                    if (data[dataElement]) {
                         // const orgUnit = dataSetUnits[data[dataElement][mapping.value]['orgUnit']];
                         // if (orgUnit) {
                             dataValues = [...dataValues, {
                                 dataElement,
-                                value: data[dataElement][mapping.value]['value'],
-                                period: data[dataElement][mapping.value]['period'],
-                                categoryOptionCombo: coc.id,
+                                // value: data[dataElement][mapping.value]['value'],
+                                // period: data[dataElement][mapping.value]['period'],
+                                // categoryOptionCombo: coc.id,
                                 // orgUnit
                             }]
                         // }
-                    }*/
+                    }
                 })
             });
         }
