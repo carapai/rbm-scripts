@@ -31,7 +31,6 @@ module.exports.processData = (dataSet, data) => {
     let dataValues = [];
     data = nest(data, [dataSet.dataElementColumn.value]);
 
-
     const dataSetUnits = _.fromPairs(dataSet.organisationUnits.map(o => {
         if (dataSet.orgUnitStrategy.value === 'name') {
             return [o.name.toLocaleLowerCase(), o.id];
@@ -41,13 +40,14 @@ module.exports.processData = (dataSet, data) => {
         return [o.id, o.id];
     }));
 
+    let validatedData = [];
+
     forms.forEach(f => {
         let p = {};
         f.dataElements.forEach(element => {
             if (element.mapping) {
                 const foundData = data[element.mapping.value];
                 if (foundData) {
-                    // groupedData = _.fromPairs());
                     const groupedData = foundData.map(d => {
                         return {
                             period: d[dataSet.periodColumn.value],
@@ -57,35 +57,35 @@ module.exports.processData = (dataSet, data) => {
                             categoryOptionCombo: d[dataSet.categoryOptionComboColumn.value].toLocaleLowerCase()
                         }
                     });
-                    const obj = _.fromPairs([[element.id, groupedData]]);
-                    p = {...p, ...obj}
+                    validatedData = [...validatedData, ...groupedData];
+                    /*const obj = _.fromPairs([[element.id, groupedData]]);
+                    p = {...p, ...obj}*/
                 }
             }
         });
-        data = p;
-
+        /*data = p;*/
         if (data) {
             f.categoryOptionCombos.forEach(coc => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
-                    const values = data[dataElement];
-                    if (values) {
-                        values.filter(v => {
-                            return v.categoryOptionCombo === mapping.value.toLocaleLowerCase();
-                        }).forEach(d => {
-                            if (d['orgUnit']) {
-                                const orgUnit = dataSetUnits[d['orgUnit']];
-                                if (orgUnit) {
-                                    dataValues = [...dataValues, {
-                                        dataElement,
-                                        value: d['value'],
-                                        period: d['period'],
-                                        categoryOptionCombo: coc.id,
-                                        orgUnit
-                                    }]
-                                }
+                    // const values = data[dataElement];
+                    // if (values) {
+                    validatedData.filter(v => {
+                        return v.categoryOptionCombo === mapping.value.toLocaleLowerCase() && v.dataElement === dataElement;
+                    }).forEach(d => {
+                        if (d['orgUnit']) {
+                            const orgUnit = dataSetUnits[d['orgUnit']];
+                            if (orgUnit) {
+                                dataValues = [...dataValues, {
+                                    dataElement,
+                                    value: d['value'],
+                                    period: d['period'],
+                                    categoryOptionCombo: coc.id,
+                                    orgUnit
+                                }]
                             }
-                        });
-                    }
+                        }
+                    });
+                    // }
                 })
             });
         }
