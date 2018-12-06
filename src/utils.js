@@ -39,6 +39,7 @@ module.exports.processData = (dataSet, data) => {
         return [o.id, o.id];
     }));
 
+    console.log(JSON.stringify(data, null, 2));
     forms.forEach(f => {
         let p = {};
         f.dataElements.forEach(element => {
@@ -62,6 +63,7 @@ module.exports.processData = (dataSet, data) => {
             }
         });
         data = p;
+        console.log(JSON.stringify(data, null, 2));
         /*if (data) {
             f.categoryOptionCombos.forEach(coc => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
