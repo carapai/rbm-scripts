@@ -63,12 +63,12 @@ module.exports.processData = (dataSet, data) => {
             }
         });
         data = p;
-        console.log(JSON.stringify(data, null, 2));
-        /*if (data) {
+        // console.log(JSON.stringify(data, null, 2));
+        if (data) {
             f.categoryOptionCombos.forEach(coc => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
-                    // console.log(dataElement);
-                    if (data[dataElement]) {
+                    console.log(dataElement);
+                    /*if (data[dataElement]) {
                         // const orgUnit = dataSetUnits[data[dataElement][mapping.value]['orgUnit']];
                         // if (orgUnit) {
                             dataValues = [...dataValues, {
@@ -79,10 +79,10 @@ module.exports.processData = (dataSet, data) => {
                                 // orgUnit
                             }]
                         // }
-                    }
+                    }*/
                 })
             });
-        }*/
+        }
     });
 
     return dataValues;
