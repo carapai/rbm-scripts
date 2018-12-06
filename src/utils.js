@@ -60,13 +60,15 @@ module.exports.processData = (dataSet, data) => {
             }
         });
         data = p;
-        if (data) {
+
+        console.log(JSON.stringify(data,null,2));
+        /*if (data) {
             f.categoryOptionCombos.forEach(coc => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
                     const values = data[dataElement];
                     console.log(values);
                     console.log('The end');
-                    /*if (values) {
+                    if (values) {
                         // _.forOwn(values, value => {
                         const orgUnit = dataSetUnits[data[dataElement]['value']['orgUnit']];
                         if (orgUnit) {
@@ -79,10 +81,10 @@ module.exports.processData = (dataSet, data) => {
                             }]
                         }
                         // });
-                    }*/
+                    }
                 })
             });
-        }
+        }*/
     });
 
     return dataValues;
