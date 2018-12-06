@@ -39,13 +39,13 @@ module.exports.processData = (dataSet, data) => {
         return [o.id, o.id];
     }));
 
-    console.log(JSON.stringify(data, null, 2));
+    // console.log(JSON.stringify(data, null, 2));
     forms.forEach(f => {
         let p = {};
         f.dataElements.forEach(element => {
             if (element.mapping) {
                 const foundData = data[element.mapping.value];
-                console.log(foundData);
+                console.log(JSON.stringify(foundData, null, 2));
                 let groupedData = {};
                 if (foundData) {
                     groupedData = _.fromPairs(foundData.map(d => {
