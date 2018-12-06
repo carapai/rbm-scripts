@@ -63,12 +63,11 @@ module.exports.processData = (dataSet, data) => {
         });
         data = p;
 
-        console.log(JSON.stringify(p,null,2));
         // console.log(JSON.stringify(data, null, 2));
         if (data) {
             f.categoryOptionCombos.forEach(coc => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
-                    // console.log(mapping);
+                    console.log(JSON.stringify(data[dataElement], null, 2));
                     /*if (data[dataElement]) {
                         // const orgUnit = dataSetUnits[data[dataElement][mapping.value]['orgUnit']];
                         // if (orgUnit) {
