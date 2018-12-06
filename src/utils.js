@@ -44,9 +44,8 @@ module.exports.processData = (dataSet, data) => {
         let p = {};
         f.dataElements.forEach(element => {
             if (element.mapping) {
-                console.log(element.mapping.value);
                 const foundData = data[element.mapping.value];
-                // console.log(foundData);
+                console.log(foundData);
                 let groupedData = {};
                 if (foundData) {
                     groupedData = _.fromPairs(foundData.map(d => {
