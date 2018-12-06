@@ -65,18 +65,18 @@ module.exports.processData = (dataSet, data) => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
                     const values = data[dataElement];
                     if (values) {
-                        _.forOwn(values, value => {
-                            const orgUnit = dataSetUnits[value.orgUnit];
-                            if (orgUnit) {
-                                dataValues = [...dataValues, {
-                                    dataElement,
-                                    value: value.value,
-                                    period: value.period,
-                                    categoryOptionCombo: coc.id,
-                                    orgUnit
-                                }]
-                            }
-                        });
+                        // _.forOwn(values, value => {
+                        const orgUnit = dataSetUnits[values['value']['orgUnit']];
+                        if (orgUnit) {
+                            dataValues = [...dataValues, {
+                                dataElement,
+                                value: values['value']['value'],
+                                period: values['value']['period'],
+                                categoryOptionCombo: coc.id,
+                                orgUnit
+                            }]
+                        }
+                        // });
                     }
                 })
             });
