@@ -46,19 +46,16 @@ module.exports.processData = (dataSet, data) => {
         f.dataElements.forEach(element => {
             if (element.mapping) {
                 const foundData = data[element.mapping.value];
-
-                console.log(JSON.stringify(foundData, null, 2));
-
-                let groupedData = {};
                 if (foundData) {
-                    groupedData = _.fromPairs(foundData.map(d => {
-                        return [d[dataSet.categoryOptionComboColumn.value], {
+                    // groupedData = _.fromPairs());
+                    const groupedData = foundData.map(d => {
+                        return {
                             period: d[dataSet.periodColumn.value],
                             value: d[dataSet.dataValueColumn.value],
-                            orgUnit: d[dataSet.orgUnitColumn.value].toLocaleLowerCase()
-                        }]
-                    }));
-
+                            orgUnit: d[dataSet.orgUnitColumn.value].toLocaleLowerCase(),
+                            dataElement: element.id
+                        }
+                    });
                     const obj = _.fromPairs([[element.id, groupedData]]);
                     p = {...p, ...obj}
                 }
@@ -66,13 +63,13 @@ module.exports.processData = (dataSet, data) => {
         });
         data = p;
 
-        /*if (data) {
+        if (data) {
             f.categoryOptionCombos.forEach(coc => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
                     const values = data[dataElement];
-                    console.log(values);
+                    console.log(JSON.stringify(values, null, 2));
                     console.log('The end');
-                    if (values) {
+                    /*if (values) {
                         // _.forOwn(values, value => {
                         const orgUnit = dataSetUnits[data[dataElement]['value']['orgUnit']];
                         if (orgUnit) {
@@ -85,10 +82,10 @@ module.exports.processData = (dataSet, data) => {
                             }]
                         }
                         // });
-                    }
+                    }*/
                 })
             });
-        }*/
+        }
     });
 
     return dataValues;
