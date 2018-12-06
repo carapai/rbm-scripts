@@ -45,7 +45,6 @@ module.exports.processData = (dataSet, data) => {
         f.dataElements.forEach(element => {
             if (element.mapping) {
                 const foundData = data[element.mapping.value];
-                // console.log(JSON.stringify(foundData, null, 2));
                 let groupedData = {};
                 if (foundData) {
                     groupedData = _.fromPairs(foundData.map(d => {
@@ -63,10 +62,10 @@ module.exports.processData = (dataSet, data) => {
         });
         data = p;
 
-        // console.log(JSON.stringify(data, null, 2));
         if (data) {
             f.categoryOptionCombos.forEach(coc => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
+                    console.log(JSON.stringify(data[dataElement],null,2));
                     if (data[dataElement]) {
                         // const orgUnit = dataSetUnits[data[dataElement][mapping.value]['orgUnit']];
                         // if (orgUnit) {
