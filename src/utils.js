@@ -53,7 +53,8 @@ module.exports.processData = (dataSet, data) => {
                             period: d[dataSet.periodColumn.value],
                             value: d[dataSet.dataValueColumn.value],
                             orgUnit: d[dataSet.orgUnitColumn.value].toLocaleLowerCase(),
-                            dataElement: element.id
+                            dataElement: element.id,
+                            categoryOptionCombo: d[dataSet.categoryOptionComboColumn.value].toLocaleLowerCase()
                         }
                     });
                     const obj = _.fromPairs([[element.id, groupedData]]);
@@ -67,8 +68,16 @@ module.exports.processData = (dataSet, data) => {
             f.categoryOptionCombos.forEach(coc => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
                     const values = data[dataElement];
-                    console.log(JSON.stringify(values, null, 2));
-                    console.log('The end');
+                    if (values) {
+                        const filtered = values.filter(v => {
+                            return v.categoryOptionCombo === mapping.value.toLocaleLowerCase();
+                        });
+
+                        console.log(JSON.stringify(filtered, null, 2));
+                        console.log('The end');
+                    }
+
+
                     /*if (values) {
                         // _.forOwn(values, value => {
                         const orgUnit = dataSetUnits[data[dataElement]['value']['orgUnit']];
