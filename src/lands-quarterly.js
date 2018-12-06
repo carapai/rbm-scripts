@@ -12,14 +12,14 @@ const processQuarterly = async () => {
     const data = await soap.getLAM08('2017Q1');
     const dataValues = utils.processData(dataSet, data['return']);
 
-    return _.uniqWith(dataValues, _.isEqual);
+    const processedData = _.uniqWith(dataValues, _.isEqual);
 
-   /* try {
-        const response = await utils.insertData({dataValues});
+    try {
+        const response = await utils.insertData({dataValues: processedData});
         return response;
     } catch (e) {
-       return e
-    }*/
+        return e
+    }
 
 };
 
