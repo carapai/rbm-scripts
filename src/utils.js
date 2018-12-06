@@ -71,7 +71,7 @@ module.exports.processData = (dataSet, data) => {
                         // if (orgUnit) {
                         dataValues = [...dataValues, {
                             dataElement,
-                            value: data[dataElement][mapping.value]['value'],
+                            // value: data[dataElement][mapping.value]['value'],
                             period: data[dataElement][mapping.value]['period'],
                             categoryOptionCombo: coc.id,
                             // orgUnit
