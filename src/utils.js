@@ -30,6 +30,9 @@ module.exports.processData = (dataSet, data) => {
     const forms = dataSet.forms;
     let dataValues = [];
     data = nest(data, [dataSet.dataElementColumn.value]);
+
+    console.log(JSON.stringify(data, null, 2));
+
     const dataSetUnits = _.fromPairs(dataSet.organisationUnits.map(o => {
         if (dataSet.orgUnitStrategy.value === 'name') {
             return [o.name.toLocaleLowerCase(), o.id];
@@ -61,7 +64,6 @@ module.exports.processData = (dataSet, data) => {
         });
         data = p;
 
-        console.log(JSON.stringify(data,null,2));
         /*if (data) {
             f.categoryOptionCombos.forEach(coc => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
