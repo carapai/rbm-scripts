@@ -8,7 +8,7 @@ const dataSet = require('./lands-quarterly-mapping.json');
 const processQuarterly = async () => {
 
     const data = await soap.getLAM08('2017Q1');
-    console.log(data);
+    console.log(JSON.stringify(data));
     const dataValues = utils.processData(dataSet, data);
 
     return dataValues;
