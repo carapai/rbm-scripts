@@ -3,7 +3,7 @@ const _ = require('lodash');
 const rq = require('request-promise');
 const username = 'Jeric';
 const password = '20SeraPkp8FA!18';
-const dhisUrl = 'http://localhost:8080';
+const dhisUrl = 'https://dhis2.stephocay.com';
 
 const dhis2 = new url(dhisUrl);
 
@@ -39,7 +39,6 @@ module.exports.processData = (dataSet, data) => {
         return [o.id, o.id];
     }));
 
-    // console.log(JSON.stringify(data, null, 2));
     forms.forEach(f => {
         let p = {};
         f.dataElements.forEach(element => {
@@ -64,7 +63,6 @@ module.exports.processData = (dataSet, data) => {
         if (data) {
             f.categoryOptionCombos.forEach(coc => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
-                    // console.log(JSON.stringify(data[dataElement], null, 2));
                     const values = data[dataElement];
                     if (values) {
                         _.forOwn(values, value => {
@@ -79,8 +77,6 @@ module.exports.processData = (dataSet, data) => {
                                 }]
                             }
                         });
-                        // const orgUnit = dataSetUnits[data[dataElement][mapping.value]['orgUnit']];
-
                     }
                 })
             });

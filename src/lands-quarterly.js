@@ -10,7 +10,12 @@ const processQuarterly = async () => {
     const data = await soap.getLAM08('2017Q1');
     const dataValues = utils.processData(dataSet, data['return']);
 
-    return dataValues;
+    try {
+        const response = await utils.insertData({dataValues});
+        return response;
+    } catch (e) {
+       return e
+    }
 
 };
 
