@@ -1,22 +1,28 @@
-data = require('./data_samples/lands_national_monthly.json');
-
+const _ = require('lodash');
 
 const soap = require('./soap');
 const utils = require('./utils');
 
-
 const dataSet = require('./lands-monthly-mapping.json');
 
 
-const processQuarterly = async () => {
+const processMonthly = async () => {
 
-    const data = await soap.getLAM08('2017Q1');
-    const dataValues = utils.processData(dataSet, data['return']);
+    // TODO calculate monthly period based on year
 
-    return dataValues;
+    const allData = await soap.getLAM12('201701')['return'];
 
+    const dataValues = utils.processData(dataSet, allData);
+
+    const processedData = _.uniqWith(dataValues, _.isEqual);
+
+    try {
+        return await utils.insertData({dataValues: processedData});
+    } catch (e) {
+        return e
+    }
 };
 
-processQuarterly().then(response => {
+processMonthly().then(response => {
     console.log(JSON.stringify(response, null, 2));
 });

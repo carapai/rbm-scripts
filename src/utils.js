@@ -1,6 +1,8 @@
 const url = require('url').URL;
 const _ = require('lodash');
 const rq = require('request-promise');
+
+// TODO remove username and password from script
 const username = 'Jeric';
 const password = '20SeraPkp8FA!18';
 const dhisUrl = 'https://dhis2.stephocay.com';
@@ -43,7 +45,6 @@ module.exports.processData = (dataSet, data) => {
     let validatedData = [];
 
     forms.forEach(f => {
-        let p = {};
         f.dataElements.forEach(element => {
             if (element.mapping) {
                 const foundData = data[element.mapping.value];
@@ -58,37 +59,29 @@ module.exports.processData = (dataSet, data) => {
                         }
                     });
                     validatedData = [...validatedData, ...groupedData];
-                    /*const obj = _.fromPairs([[element.id, groupedData]]);
-                    p = {...p, ...obj}*/
                 }
             }
         });
-        /*data = p;*/
-        if (data) {
-            f.categoryOptionCombos.forEach(coc => {
-                _.forOwn(coc.mapping, (mapping, dataElement) => {
-                    // const values = data[dataElement];
-                    // if (values) {
-                    validatedData.filter(v => {
-                        return v.categoryOptionCombo === mapping.value.toLocaleLowerCase() && v.dataElement === dataElement;
-                    }).forEach(d => {
-                        if (d['orgUnit']) {
-                            const orgUnit = dataSetUnits[d['orgUnit']];
-                            if (orgUnit) {
-                                dataValues = [...dataValues, {
-                                    dataElement,
-                                    value: d['value'],
-                                    period: d['period'],
-                                    categoryOptionCombo: coc.id,
-                                    orgUnit
-                                }]
-                            }
+        f.categoryOptionCombos.forEach(coc => {
+            _.forOwn(coc.mapping, (mapping, dataElement) => {
+                validatedData.filter(v => {
+                    return v.categoryOptionCombo === mapping.value.toLocaleLowerCase() && v.dataElement === dataElement;
+                }).forEach(d => {
+                    if (d['orgUnit']) {
+                        const orgUnit = dataSetUnits[d['orgUnit']];
+                        if (orgUnit) {
+                            dataValues = [...dataValues, {
+                                dataElement,
+                                value: d['value'],
+                                period: d['period'],
+                                categoryOptionCombo: coc.id,
+                                orgUnit
+                            }]
                         }
-                    });
-                    // }
-                })
+                    }
+                });
             });
-        }
+        });
     });
 
     return dataValues;

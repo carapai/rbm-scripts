@@ -48,8 +48,9 @@ const processWaterData = async () => {
             const val = {};
             val['Parameter'] = de.mapping.value;
             val['Category'] = 'default';
-            val['Location'] = utils.ouMappings[d['LocationId']];
+            val['Location'] = d['LocationId'];
             val['Value'] = d['EndValue'];
+            // TODO calculate period dynamically
             val['Year'] = '2018July';
             return val;
         }).filter(d => {
@@ -62,13 +63,12 @@ const processWaterData = async () => {
     const dataValues = utils.processData(dataSet, processed);
 
     try {
-        const response = await utils.insertData({dataValues});
-        console.log(response);
+        return await utils.insertData({dataValues});
     } catch (e) {
-        console.log(e);
+        return e;
     }
 };
 
 processWaterData().then(response => {
-    console.log('It has finished');
+    console.log(JSON.stringify(response, null, 2));
 });
