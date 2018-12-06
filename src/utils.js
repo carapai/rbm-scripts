@@ -48,6 +48,7 @@ module.exports.processData = (dataSet, data) => {
                 let groupedData = {};
                 if (foundData) {
                     groupedData = _.fromPairs(foundData.map(d => {
+                        console.log(d);
                         return [d[dataSet.categoryOptionComboColumn.value], {
                             period: d[dataSet.periodColumn.value],
                             value: d[dataSet.dataValueColumn.value],
