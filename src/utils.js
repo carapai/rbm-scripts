@@ -61,22 +61,26 @@ module.exports.processData = (dataSet, data) => {
             }
         });
         data = p;
-        console.log(JSON.stringify(data, null, 2));
         if (data) {
             f.categoryOptionCombos.forEach(coc => {
                 _.forOwn(coc.mapping, (mapping, dataElement) => {
                     // console.log(JSON.stringify(data[dataElement], null, 2));
-                    if (data[dataElement]) {
+                    const values = data[dataElement];
+                    if (values) {
+                        _.forOwn(values, value => {
+                            const orgUnit = dataSetUnits[value.orgUnit];
+                            if (orgUnit) {
+                                dataValues = [...dataValues, {
+                                    dataElement,
+                                    value: value.value,
+                                    period: value.period,
+                                    categoryOptionCombo: coc.id,
+                                    orgUnit
+                                }]
+                            }
+                        });
                         // const orgUnit = dataSetUnits[data[dataElement][mapping.value]['orgUnit']];
-                        // if (orgUnit) {
-                        dataValues = [...dataValues, {
-                            dataElement,
-                            // value: data[dataElement][mapping.value]['value'],
-                            // period: data[dataElement][mapping.value]['period'],
-                            categoryOptionCombo: coc.id,
-                            // orgUnit
-                        }]
-                        // }
+
                     }
                 })
             });

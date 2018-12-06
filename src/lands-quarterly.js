@@ -15,5 +15,5 @@ const processQuarterly = async () => {
 };
 
 processQuarterly().then(response => {
-    // console.log(JSON.stringify(response, null, 2));
+    console.log(JSON.stringify(response, null, 2));
 });
