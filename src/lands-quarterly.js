@@ -14,6 +14,7 @@ const fmt = 'Y[Q]Q';
 const processQuarterly = async () => {
 
     const period = moment().subtract(1, 'Q').format(fmt);
+    console.log(period);
 
     try {
         // const lam07Data = await soap.getLAM07(period)['return'];
@@ -23,14 +24,14 @@ const processQuarterly = async () => {
         // const lam10Data = await soap.getLAM10(period)['return'];
         // const lam24Data = await soap.getLAM24(period)['return'];
         // const lam25Data = await soap.getLAM25(period)['return'];
-        const allData = [
+        /*const allData = [
             // ...lam07Data,
             ...lam08Data,
             // ...lam09Data,
             // ...lam10Data,
             // ...lam24Data,
             // ...lam25Data
-        ];
+        ];*/
         // const dataValues = utils.processData(dataSet, allData);
         // const processedData = _.uniqWith(dataValues, _.isEqual);
         // return await utils.insertData({dataValues: processedData});

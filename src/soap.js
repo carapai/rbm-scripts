@@ -5,7 +5,6 @@ module.exports.getLAM08 = period => {
     const args = {period: period};
     return new Promise((resolve, reject) => {
         soap.createClient(url, (err, client) => {
-            console.log(err)
             if (err) reject(err);
             client.getlistOfLAM08(args, (err, result) => {
                 if (err) reject(err);
