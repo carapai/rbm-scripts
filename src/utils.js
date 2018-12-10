@@ -53,9 +53,9 @@ module.exports.processData = (dataSet, data) => {
                         return {
                             period: d[dataSet.periodColumn.value],
                             value: d[dataSet.dataValueColumn.value],
-                            orgUnit: d[dataSet.orgUnitColumn.value].toLocaleLowerCase(),
+                            // orgUnit: d[dataSet.orgUnitColumn.value].toLocaleLowerCase(),
                             dataElement: element.id,
-                            // categoryOptionCombo: d[dataSet.categoryOptionComboColumn.value].toLocaleLowerCase()
+                            categoryOptionCombo: d[dataSet.categoryOptionComboColumn.value].toLocaleLowerCase()
                         }
                     });
 
