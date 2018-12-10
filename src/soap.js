@@ -8,7 +8,6 @@ module.exports.getLAM08 = period => {
             console.log(err)
             if (err) reject(err);
             client.getlistOfLAM08(args, (err, result) => {
-                console.log(result);
                 if (err) reject(err);
                 else resolve(result);
             });
