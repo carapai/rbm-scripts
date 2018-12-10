@@ -69,15 +69,15 @@ module.exports.processData = (dataSet, data) => {
                 }).forEach(d => {
                     if (d['orgUnit']) {
                         const orgUnit = dataSetUnits[d['orgUnit']];
-                        // if (orgUnit) {
-                        dataValues = [...dataValues, {
-                            dataElement,
-                            value: d['value'],
-                            period: d['period'],
-                            categoryOptionCombo: coc.id,
-                            orgUnit
-                        }]
-                        // }
+                        if (orgUnit) {
+                            dataValues = [...dataValues, {
+                                dataElement,
+                                value: d['value'],
+                                period: d['period'],
+                                categoryOptionCombo: coc.id,
+                                orgUnit
+                            }]
+                        }
                     }
                 });
             });
