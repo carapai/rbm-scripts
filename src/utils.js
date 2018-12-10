@@ -32,6 +32,7 @@ module.exports.processData = (dataSet, data) => {
     const forms = dataSet.forms;
     let dataValues = [];
     data = nest(data, [dataSet.dataElementColumn.value]);
+    console.log(data);
 
     const dataSetUnits = _.fromPairs(dataSet.organisationUnits.map(o => {
         if (dataSet.orgUnitStrategy.value === 'name') {
