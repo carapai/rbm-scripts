@@ -43,6 +43,7 @@ module.exports.processData = (dataSet, data) => {
     }));
     let validatedData = [];
 
+    console.log(data);
 
     forms.forEach(f => {
         f.dataElements.forEach(element => {
