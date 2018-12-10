@@ -66,7 +66,7 @@ module.exports.processData = (dataSet, data) => {
             }
         });
 
-        /*f.categoryOptionCombos.forEach(coc => {
+        f.categoryOptionCombos.forEach(coc => {
             _.forOwn(coc.mapping, (mapping, dataElement) => {
                 validatedData.filter(v => {
                     return v.categoryOptionCombo === mapping.value.toLocaleLowerCase() && v.dataElement === dataElement;
@@ -85,7 +85,7 @@ module.exports.processData = (dataSet, data) => {
                     }
                 });
             });
-        });*/
+        });
     });
 
     return dataValues;
