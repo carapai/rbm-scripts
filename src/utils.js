@@ -48,8 +48,6 @@ module.exports.processData = (dataSet, data) => {
         f.dataElements.forEach(element => {
             if (element.mapping) {
                 const foundData = data[element.mapping.value];
-                console.log(element.mapping.value);
-                console.log(foundData);
                 if (foundData) {
                     const groupedData = foundData.map(d => {
                         return {
