@@ -51,11 +51,11 @@ module.exports.processData = (dataSet, data) => {
                 if (foundData) {
                     const groupedData = foundData.map(d => {
                         return {
-                            period: d[dataSet.periodColumn.value],
-                            value: d[dataSet.dataValueColumn.value],
-                            orgUnit: d[dataSet.orgUnitColumn.value].toLocaleLowerCase(),
+                            // period: d[dataSet.periodColumn.value],
+                            // value: d[dataSet.dataValueColumn.value],
+                            // orgUnit: d[dataSet.orgUnitColumn.value].toLocaleLowerCase(),
                             dataElement: element.id,
-                            categoryOptionCombo: d[dataSet.categoryOptionComboColumn.value].toLocaleLowerCase()
+                            // categoryOptionCombo: d[dataSet.categoryOptionComboColumn.value].toLocaleLowerCase()
                         }
                     });
 
@@ -66,7 +66,7 @@ module.exports.processData = (dataSet, data) => {
             }
         });
 
-        f.categoryOptionCombos.forEach(coc => {
+        /*f.categoryOptionCombos.forEach(coc => {
             _.forOwn(coc.mapping, (mapping, dataElement) => {
                 validatedData.filter(v => {
                     return v.categoryOptionCombo === mapping.value.toLocaleLowerCase() && v.dataElement === dataElement;
@@ -85,7 +85,7 @@ module.exports.processData = (dataSet, data) => {
                     }
                 });
             });
-        });
+        });*/
     });
 
     return dataValues;
