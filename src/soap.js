@@ -1,5 +1,5 @@
 const soap = require('soap');
-const url = 'http://10.10.69.141:4740/LAISWebServiceP/RBME?WSDL';
+const url = 'http://10.10.69.141:4740/LAISWebService/RBME?wsdl';
 
 module.exports.getLAM08 = period => {
     const args = {period: period};
