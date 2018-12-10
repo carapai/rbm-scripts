@@ -31,9 +31,9 @@ const processQuarterly = async () => {
             // ...lam24Data,
             // ...lam25Data
         ];
-        const dataValues = utils.processData(dataSet, allData);
-        const processedData = _.uniqWith(dataValues, _.isEqual);
-        return await utils.insertData({dataValues: processedData});
+        // const dataValues = utils.processData(dataSet, allData);
+        // const processedData = _.uniqWith(dataValues, _.isEqual);
+        // return await utils.insertData({dataValues: processedData});
     } catch (e) {
         return e
     }
