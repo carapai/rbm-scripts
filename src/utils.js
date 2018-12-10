@@ -32,7 +32,6 @@ module.exports.processData = (dataSet, data) => {
     const forms = dataSet.forms;
     let dataValues = [];
     data = nest(data, [dataSet.dataElementColumn.value]);
-    console.log(data);
 
     const dataSetUnits = _.fromPairs(dataSet.organisationUnits.map(o => {
         if (dataSet.orgUnitStrategy.value === 'name') {
@@ -49,6 +48,7 @@ module.exports.processData = (dataSet, data) => {
         f.dataElements.forEach(element => {
             if (element.mapping) {
                 const foundData = data[element.mapping.value];
+                console.log(element.mapping.value);
                 console.log(foundData);
                 if (foundData) {
                     const groupedData = foundData.map(d => {
