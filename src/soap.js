@@ -20,7 +20,7 @@ module.exports.getLAM07 = period => {
         soap.createClient(url, (err, client) => {
             if (err) reject(err);
             //Todo call method from soap
-            resolve({return: []});
+            resolve([]);
         });
     });
 };
@@ -33,7 +33,7 @@ module.exports.getLAM09 = period => {
             if (err) reject(err);
             client.getValueOfLAM09(args, (err, result) => {
                 if (err) reject(err);
-                else resolve(result);
+                else resolve(result['return']);
             });
         });
     });
@@ -47,7 +47,7 @@ module.exports.getLAM10 = period => {
             if (err) reject(err);
             client.getlistOfLAM10(args, (err, result) => {
                 if (err) reject(err);
-                else resolve(result);
+                else resolve(result['return']);
             });
         });
     });
@@ -60,7 +60,7 @@ module.exports.getLAM24 = period => {
         soap.createClient(url, (err, client) => {
             if (err) reject(err);
             //Todo call method from soap
-            resolve({return: []});
+            resolve([]);
         });
     });
 };
@@ -71,7 +71,7 @@ module.exports.getLAM25 = period => {
         soap.createClient(url, (err, client) => {
             if (err) reject(err);
             //Todo call method from soap
-            resolve({return: []});
+            resolve([]);
         });
     });
 };
@@ -83,7 +83,7 @@ module.exports.getLAM12 = period => {
             if (err) reject(err);
             client.getValueOfLAM12(args, (err, result) => {
                 if (err) reject(err);
-                else resolve(result);
+                else resolve(result['return']);
             });
         });
     });
