@@ -1,22 +1,17 @@
 const _ = require('lodash');
-
+const moment = require('moment');
 const soap = require('./soap');
 const utils = require('./utils');
 
 const dataSet = require('./lands-monthly-mapping.json');
 
-
+const fmt = 'YYYYMM';
 const processMonthly = async () => {
-
-    // TODO calculate monthly period based on year
-
-    const allData = await soap.getLAM12('201701')['return'];
-
-    const dataValues = utils.processData(dataSet, allData);
-
-    const processedData = _.uniqWith(dataValues, _.isEqual);
-
+    const period = moment().subtract(1, 'M').format(fmt);
     try {
+        const allData = await soap.getLAM12(period)['return'];
+        const dataValues = utils.processData(dataSet, allData);
+        const processedData = _.uniqWith(dataValues, _.isEqual);
         return await utils.insertData({dataValues: processedData});
     } catch (e) {
         return e

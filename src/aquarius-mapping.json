@@ -113,6 +113,7 @@
           "id": "Y1Iow5rJFKF",
           "code": "PAR9",
           "name": "DIN (mg/L)",
+          "param": "NO3_dis",
           "mapping": {
             "label": "DIN (mg/L)",
             "value": "DIN (mg/L)"
@@ -132,6 +133,7 @@
           "id": "XIWZqyObPzs",
           "code": "PAR8",
           "name": "DIP (mg/L)",
+          "param": "PO4",
           "mapping": {
             "label": "DIP (mg/L)",
             "value": "DIP (mg/L)"

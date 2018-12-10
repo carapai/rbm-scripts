@@ -1,6 +1,6 @@
 const rq = require('request-promise');
 const csv2json = require("csvtojson");
-
+const moment = require('moment');
 const winston = require('./winston');
 
 
@@ -8,6 +8,13 @@ const serverUrl = 'http://10.10.82.196/AQUARIUS/Publish/AquariusPublishRestServi
 const dataSet = require('./aquarius-mapping.json');
 
 const utils = require('./utils');
+
+const year = moment().year();
+
+const startDate = moment(year - 1 + '-07-01');
+const endDate = moment(year + '-06-30');
+
+const period = year - 1 + 'July';
 
 const login = async () => {
     const url = serverUrl + 'GetAuthToken';
@@ -18,15 +25,16 @@ const login = async () => {
 
 
 const downloadData = async (endpoint, params) => {
-    const token = await login();
-    const url = serverUrl + endpoint;
-    params = {...params, token};
+
     try {
+        const token = await login();
+        const url = serverUrl + endpoint;
+        params = {...params, token};
         const response = await rq({uri: url, qs: params, encoding: null});
         const responseString = response.toString('utf8');
         return await csv2json().fromString(responseString)
     } catch (error) {
-        winston.log({level: 'warn', message: 'Something wired happened'});
+        winston.log({level: 'warn', message: 'Something wired happened ' + JSON.stringify(e)});
     }
 };
 
@@ -49,12 +57,12 @@ const processWaterData = async () => {
             val['Parameter'] = de.mapping.value;
             val['Category'] = 'default';
             val['Location'] = d['LocationId'];
-            val['Value'] = d['EndValue'];
-            // TODO calculate period dynamically
-            val['Year'] = '2018July';
+            val['Value'] = d['Mean'];
+            val['period'] = moment(d['EndTime'], 'YYYY-MM-DD');
+            val['Year'] = period;
             return val;
         }).filter(d => {
-            return d.Location;
+            return d.Location && d.period.isBetween(startDate, endDate, null, '[]');
         });
         processed = [...processed, ...realData];
 
