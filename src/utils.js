@@ -52,7 +52,7 @@ module.exports.processData = (dataSet, data) => {
                     const groupedData = foundData.map(d => {
                         return {
                             period: d[dataSet.periodColumn.value],
-                            // value: d[dataSet.dataValueColumn.value],
+                            value: d[dataSet.dataValueColumn.value],
                             // orgUnit: d[dataSet.orgUnitColumn.value].toLocaleLowerCase(),
                             dataElement: element.id,
                             // categoryOptionCombo: d[dataSet.categoryOptionComboColumn.value].toLocaleLowerCase()
