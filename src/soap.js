@@ -8,7 +8,7 @@ module.exports.getLAM08 = period => {
             if (err) reject(err);
             client.getlistOfLAM08(args, (err, result) => {
                 if (err) reject(err);
-                else resolve(result);
+                else resolve(result['return']);
             });
         });
     });
