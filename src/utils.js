@@ -41,13 +41,14 @@ module.exports.processData = (dataSet, data) => {
         }
         return [o.id, o.id];
     }));
+    let validatedData = [];
 
 
     forms.forEach(f => {
-        let validatedData = [];
         f.dataElements.forEach(element => {
             if (element.mapping) {
                 const foundData = data[element.mapping.value];
+                console.log(foundData);
                 if (foundData) {
                     const groupedData = foundData.map(d => {
                         return {
@@ -63,7 +64,6 @@ module.exports.processData = (dataSet, data) => {
             }
         });
 
-        console.log(validatedData);
         f.categoryOptionCombos.forEach(coc => {
             _.forOwn(coc.mapping, (mapping, dataElement) => {
                 validatedData.filter(v => {
