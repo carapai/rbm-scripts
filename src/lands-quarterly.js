@@ -24,8 +24,7 @@ const processQuarterly = async () => {
         // const lam25Data = await soap.getLAM25(period);
 
 
-        return await soap.getLAM10(period);
-        // const lam24Data = await soap.getLAM24(period);
+        return await soap.getLAM24(period);
         // const lam25Data = await soap.getLAM25(period);
 
         /*const allData = [
