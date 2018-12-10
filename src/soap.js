@@ -20,7 +20,7 @@ module.exports.getLAM07 = period => {
         soap.createClient(url, (err, client) => {
             if (err) reject(err);
             //Todo call method from soap
-            resolve([]);
+            resolve({return: []});
         });
     });
 };
@@ -60,7 +60,7 @@ module.exports.getLAM24 = period => {
         soap.createClient(url, (err, client) => {
             if (err) reject(err);
             //Todo call method from soap
-            resolve([]);
+            resolve({return: []});
         });
     });
 };
@@ -71,7 +71,7 @@ module.exports.getLAM25 = period => {
         soap.createClient(url, (err, client) => {
             if (err) reject(err);
             //Todo call method from soap
-            resolve([]);
+            resolve({return: []});
         });
     });
 };
