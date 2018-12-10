@@ -383,8 +383,8 @@
           "id": "j2eablH0pUR",
           "name": "LAM08 - Total number of land transactions registered",
           "mapping": {
-            "label": "LAM08 - Total number of land transactions registered",
-            "value": "LAM08 - Total number of land transactions registered"
+            "label": "LAM08",
+            "value": "LAM08"
           }
         }
       ]
