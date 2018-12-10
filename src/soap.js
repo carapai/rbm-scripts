@@ -6,7 +6,6 @@ module.exports.getLAM08 = period => {
     return new Promise((resolve, reject) => {
         soap.createClient(url, (err, client) => {
             if (err) reject(err);
-            console.log(JSON.stringify(client));
             client.getlistOfLAM08(args, (err, result) => {
                 if (err) reject(err);
                 else resolve(result);
@@ -32,8 +31,10 @@ module.exports.getLAM09 = period => {
     return new Promise((resolve, reject) => {
         soap.createClient(url, (err, client) => {
             if (err) reject(err);
-            //Todo call method from soap
-            resolve([]);
+            client.getValueOfLAM09(args, (err, result) => {
+                if (err) reject(err);
+                else resolve(result);
+            });
         });
     });
 };
@@ -44,8 +45,10 @@ module.exports.getLAM10 = period => {
     return new Promise((resolve, reject) => {
         soap.createClient(url, (err, client) => {
             if (err) reject(err);
-            //Todo call method from soap
-            resolve([]);
+            client.getlistOfLAM10(args, (err, result) => {
+                if (err) reject(err);
+                else resolve(result);
+            });
         });
     });
 };
@@ -78,8 +81,10 @@ module.exports.getLAM12 = period => {
     return new Promise((resolve, reject) => {
         soap.createClient(url, (err, client) => {
             if (err) reject(err);
-            //Todo call method from soap
-            resolve([]);
+            client.getValueOfLAM12(args, (err, result) => {
+                if (err) reject(err);
+                else resolve(result);
+            });
         });
     });
 };
