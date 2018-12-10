@@ -4,7 +4,7 @@ const rq = require('request-promise');
 
 // TODO remove username and password from script
 const username = 'Jeric';
-const password = '20SeraPkp8FA!18';
+    const password = '20SeraPkp8FA!18';
 const dhisUrl = 'https://dhis2.stephocay.com';
 
 const dhis2 = new url(dhisUrl);
@@ -58,9 +58,6 @@ module.exports.processData = (dataSet, data) => {
                             categoryOptionCombo: d[dataSet.categoryOptionComboColumn.value] ? d[dataSet.categoryOptionComboColumn.value].toLocaleLowerCase() : null
                         }
                     });
-
-                    console.log(groupedData);
-
                     validatedData = [...validatedData, ...groupedData];
                 }
             }

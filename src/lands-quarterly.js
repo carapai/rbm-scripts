@@ -26,14 +26,15 @@ const processQuarterly = async () => {
 
 
         const allData = [
-            ...lam07Data,
-            ...lam08Data,
+            // ...lam07Data,
+            // ...lam08Data,
             lam09Data,
-            ...lam10Data,
-            ...lam24Data,
-            ...lam25Data
+            // ...lam10Data,
+            // ...lam24Data,
+            // ...lam25Data
         ];
 
+        console.log(allData);
 
         const dataValues = utils.processData(dataSet, allData);
         // const processedData = _.uniqWith(dataValues, _.isEqual);
