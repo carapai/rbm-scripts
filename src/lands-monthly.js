@@ -14,7 +14,8 @@ const processMonthly = async () => {
         const processedData = _.uniqWith(dataValues, _.isEqual);
         return await utils.insertData({dataValues: processedData});
     } catch (e) {
-        return e
+        console.log('Error');
+        // return e
     }
 };
 
