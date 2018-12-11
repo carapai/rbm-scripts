@@ -6,7 +6,6 @@ const winston = require('./winston');
 const dataSet = require('./lands-monthly-mapping.json');
 
 let {
-    importDate,
     fromDate,
     toDate
 } = require('./options');
@@ -14,23 +13,32 @@ let {
 const fmt = 'YYYYMM';
 const processMonthly = async () => {
 
-    let period = moment(importDate) || moment();
+    let periods = [];
 
-    period = period.subtract(1, 'M').format(fmt);
-    try {
-        let allData = await soap.getLAM12(period);
-
-        allData = allData.map(d => {
-            return {...d, organisationUnit: dataSet.organisationUnits[0]['name'], categoryOptioncombo: 'default'}
-        });
-
-        const dataValues = utils.processData(dataSet, allData);
-        const processedData = _.uniqWith(dataValues, _.isEqual);
-        return await utils.insertData({dataValues: processedData});
-
-    } catch (e) {
-        return e
+    if (fromDate && toDate) {
+        periods = utils.enumerateDates(moment(fromDate), moment(toDate), 'M', fmt)
+    } else {
+        const period = moment().subtract(1, 'M').format(fmt);
+        periods = [period]
     }
+
+    periods.forEach(async period => {
+
+        try {
+            let allData = await soap.getLAM12(period);
+
+            allData = allData.map(d => {
+                return {...d, organisationUnit: dataSet.organisationUnits[0]['name'], categoryOptioncombo: 'default'}
+            });
+
+            const dataValues = utils.processData(dataSet, allData);
+            const processedData = _.uniqWith(dataValues, _.isEqual);
+            return await utils.insertData({dataValues: processedData});
+
+        } catch (e) {
+            return e
+        }
+    });
 };
 
 processMonthly().then(response => {

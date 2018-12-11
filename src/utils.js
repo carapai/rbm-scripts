@@ -6,7 +6,7 @@ const moment = require('moment');
 // TODO remove username and password from script
 const username = 'Jeric';
 const password = '20SeraPkp8FA!18';
-const dhisUrl = 'https://rbme.environment.gov.rw';
+const dhisUrl = 'http://localhost:8080';
 
 const dhis2 = new url(dhisUrl);
 
@@ -38,13 +38,12 @@ module.exports.processData = (dataSet, data) => {
         if (dataSet.orgUnitStrategy.value === 'name') {
             return [o.name.toLocaleLowerCase(), o.id];
         } else if (dataSet.orgUnitStrategy.value === 'code') {
-            return [o.code, o.id];
+            return [o.code.toLocaleLowerCase(), o.id];
         }
         return [o.id, o.id];
     }));
     let validatedData = [];
 
-    console.log(data);
 
     forms.forEach(f => {
         f.dataElements.forEach(element => {
@@ -102,14 +101,11 @@ module.exports.insertData = data => {
 
 module.exports.enumerateDates = (startDate, endDate, addition, format) => {
     const dates = [];
-
     const currDate = moment(startDate).startOf(addition);
     const lastDate = moment(endDate).startOf(addition);
     dates.push(currDate.clone().format(format));
-
     while (currDate.add(1, addition).diff(lastDate) <= 0) {
         dates.push(currDate.clone().format(format));
     }
-
     return dates;
 };

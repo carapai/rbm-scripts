@@ -9,12 +9,10 @@ const dataSet = require('./aquarius-mapping.json');
 
 const utils = require('./utils');
 
-const year = moment().year();
-
-const startDate = moment(year - 1 + '-07-01');
-const endDate = moment(year + '-06-30');
-
-const period = year - 1 + 'July';
+let {
+    fromDate,
+    toDate
+} = require('./options');
 
 const login = async () => {
     const url = serverUrl + 'GetAuthToken';
@@ -43,37 +41,68 @@ const dataElements = form.dataElements.filter(de => {
     return de.param
 });
 
+const fmt = 'Y[July]';
+
 const processWaterData = async () => {
+    let periods = [];
+    if (fromDate && toDate) {
+        periods = utils.enumerateDates(moment(fromDate), moment(toDate), 'year', fmt)
+    } else {
+        const year = moment().year();
+        const period = year - 1 + 'July';
+        periods = [period];
+    }
+
+    let responses = [];
     try {
         let data = await downloadData('GetDataSetsList', {});
+        periods.forEach(async period => {
+            let processed = [];
 
-        let processed = [];
+            dataElements.forEach(de => {
+                const found = data.filter(d => {
+                    return d['Parameter'] === de.param;
+                });
+                const realData = found.map(d => {
+                    const val = {};
+                    const date = moment(d['EndTime'], 'YYYY-MM-DD');
 
-        dataElements.forEach(de => {
-            const found = data.filter(d => {
-                return d['Parameter'] === de.param;
+                    let financialYear;
+
+                    const year = date.year();
+                    const month = date.month();
+
+                    if (month < 7) {
+                        financialYear = year - 1 + 'July';
+                    } else {
+                        financialYear = year + 'July';
+                    }
+
+                    val['Parameter'] = de.mapping.value;
+                    val['Category'] = 'default';
+                    val['Location'] = d['LocationId'];
+                    val['Value'] = d['Mean'];
+                    val['Year'] = financialYear;
+                    return val;
+                }).filter(d => {
+                    return d.Location && d.Year === period;
+                });
+                processed = [...processed, ...realData];
             });
-            const realData = found.map(d => {
-                const val = {};
-                val['Parameter'] = de.mapping.value;
-                val['Category'] = 'default';
-                val['Location'] = d['LocationId'];
-                val['Value'] = d['Mean'];
-                val['period'] = moment(d['EndTime'], 'YYYY-MM-DD');
-                val['Year'] = period;
-                return val;
-            }).filter(d => {
-                return d.Location && d.period.isBetween(startDate, endDate, null, '[]');
-            });
-            processed = [...processed, ...realData];
 
+            if (processed.length > 0) {
+                const dataValues = utils.processData(dataSet, processed);
+
+                const response = utils.insertData({dataValues});
+                responses = [...responses, response];
+            }
         });
 
-        const dataValues = utils.processData(dataSet, processed);
-        return await utils.insertData({dataValues});
     } catch (e) {
-        return e;
+        responses = [...responses, e];
     }
+
+    return responses;
 };
 
 processWaterData().then(response => {
