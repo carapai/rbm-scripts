@@ -7,8 +7,8 @@ const dataSet = require('./lands-monthly-mapping.json');
 
 const fmt = 'YYYYMM';
 const processMonthly = async () => {
-    // const period = moment().subtract(1, 'M').format(fmt);
-    const period = '201803';
+    const period = moment().subtract(1, 'M').format(fmt);
+    // const period = '201803';
     try {
         const allData = await soap.getLAM12(period);
         if (allData.code) {
@@ -16,9 +16,8 @@ const processMonthly = async () => {
             allData.categoryOptioncombo = 'default';
             const dataValues = utils.processData(dataSet, [allData]);
             const processedData = _.uniqWith(dataValues, _.isEqual);
-            return processedData;
-            // return await utils.insertData({dataValues: processedData});
-
+            // return processedData;
+            return await utils.insertData({dataValues: processedData});
         }
     } catch (e) {
         // console.log('Error');
