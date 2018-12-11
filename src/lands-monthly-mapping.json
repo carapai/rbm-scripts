@@ -2,28 +2,28 @@
   "id": "bU2LoHFGUzr",
   "name": "National Monthly report",
   "orgUnitColumn": {
-    "label": "Country",
-    "value": "Country"
+    "label": "organisationUnit",
+    "value": "organisationUnit"
   },
   "periodColumn": {
-    "label": "Month",
-    "value": "Month"
+    "label": "period",
+    "value": "period"
   },
   "orgUnitStrategy": {
     "value": "name",
     "label": "name"
   },
   "dataElementColumn": {
-    "label": "Data Element",
-    "value": "Data Element"
+    "label": "code",
+    "value": "code"
   },
   "categoryOptionComboColumn": {
-    "label": "Category",
-    "value": "Category"
+    "label": "categoryOptioncombo",
+    "value": "categoryOptioncombo"
   },
   "dataValueColumn": {
-    "label": "Value",
-    "value": "Value"
+    "label": "value",
+    "value": "value"
   },
   "forms": [
     {
@@ -32,11 +32,7 @@
           "id": "HllvX50cXC0",
           "name": "default",
           "mapping": {
-            "ZqpPX9Gi9cQ": {
-              "label": "default",
-              "value": "default"
-            },
-            "lAaRHD0OUoI": {
+            "TK71erxESEv": {
               "label": "default",
               "value": "default"
             }
