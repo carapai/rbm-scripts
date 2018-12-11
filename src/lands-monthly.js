@@ -13,7 +13,8 @@ const processMonthly = async () => {
         const allData = await soap.getLAM12(period);
         const dataValues = utils.processData(dataSet, allData);
         const processedData = _.uniqWith(dataValues, _.isEqual);
-        return await utils.insertData({dataValues: processedData});
+        return processedData;
+        // return await utils.insertData({dataValues: processedData});
     } catch (e) {
         // console.log('Error');
         return e
