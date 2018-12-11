@@ -5,7 +5,7 @@ const rq = require('request-promise');
 // TODO remove username and password from script
 const username = 'Jeric';
     const password = '20SeraPkp8FA!18';
-const dhisUrl = 'https://dhis2.stephocay.com';
+const dhisUrl = 'https://rbme.environment.gov.rw';
 
 const dhis2 = new url(dhisUrl);
 
