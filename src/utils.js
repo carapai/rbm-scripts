@@ -6,7 +6,7 @@ const moment = require('moment');
 // TODO remove username and password from script
 const username = 'Jeric';
 const password = '20SeraPkp8FA!18';
-const dhisUrl = 'http://localhost:8080';
+const dhisUrl = 'https://rbme.environment.gov.rw';
 
 const dhis2 = new url(dhisUrl);
 
