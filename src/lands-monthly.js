@@ -15,7 +15,7 @@ const processMonthly = async () => {
         allData.categoryOptioncombo = 'default';
         const dataValues = utils.processData(dataSet, [allData]);
         const processedData = _.uniqWith(dataValues, _.isEqual);
-        return allData;
+        return processedData;
         // return await utils.insertData({dataValues: processedData});
     } catch (e) {
         // console.log('Error');
