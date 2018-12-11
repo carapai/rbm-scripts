@@ -44,33 +44,32 @@ const dataElements = form.dataElements.filter(de => {
 });
 
 const processWaterData = async () => {
-    let data = await downloadData('GetDataSetsList', {});
-
-    let processed = [];
-
-    dataElements.forEach(de => {
-        const found = data.filter(d => {
-            return d['Parameter'] === de.param;
-        });
-        const realData = found.map(d => {
-            const val = {};
-            val['Parameter'] = de.mapping.value;
-            val['Category'] = 'default';
-            val['Location'] = d['LocationId'];
-            val['Value'] = d['Mean'];
-            val['period'] = moment(d['EndTime'], 'YYYY-MM-DD');
-            val['Year'] = period;
-            return val;
-        }).filter(d => {
-            return d.Location && d.period.isBetween(startDate, endDate, null, '[]');
-        });
-        processed = [...processed, ...realData];
-
-    });
-
-    const dataValues = utils.processData(dataSet, processed);
-
     try {
+        let data = await downloadData('GetDataSetsList', {});
+
+        let processed = [];
+
+        dataElements.forEach(de => {
+            const found = data.filter(d => {
+                return d['Parameter'] === de.param;
+            });
+            const realData = found.map(d => {
+                const val = {};
+                val['Parameter'] = de.mapping.value;
+                val['Category'] = 'default';
+                val['Location'] = d['LocationId'];
+                val['Value'] = d['Mean'];
+                val['period'] = moment(d['EndTime'], 'YYYY-MM-DD');
+                val['Year'] = period;
+                return val;
+            }).filter(d => {
+                return d.Location && d.period.isBetween(startDate, endDate, null, '[]');
+            });
+            processed = [...processed, ...realData];
+
+        });
+
+        const dataValues = utils.processData(dataSet, processed);
         return await utils.insertData({dataValues});
     } catch (e) {
         return e;

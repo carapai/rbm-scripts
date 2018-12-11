@@ -16,29 +16,26 @@ const processQuarterly = async () => {
     const period = moment().subtract(1, 'Q').format(fmt);
 
     try {
-        const lam07Data = await soap.getLAM07(period);
+        // const lam07Data = await soap.getLAM07(period);
         const lam08Data = await soap.getLAM08(period);
         // const lam09Data = await soap.getLAM09(period);
-        const lam10Data = await soap.getLAM10(period);
-        const lam24Data = await soap.getLAM24(period);
-        const lam25Data = await soap.getLAM25(period);
-
+        // const lam10Data = await soap.getLAM10(period);
+        // const lam24Data = await soap.getLAM24(period);
+        // const lam25Data = await soap.getLAM25(period);
 
 
         const allData = [
             // ...lam07Data,
-            // ...lam08Data,
+            ...lam08Data,
             // lam09Data,
-            ...lam10Data,
+            // ...lam10Data,
             // ...lam24Data,
             // ...lam25Data
         ];
 
-        console.log(allData);
-
         const dataValues = utils.processData(dataSet, allData);
-        // const processedData = _.uniqWith(dataValues, _.isEqual);
-        return dataValues;
+        const processedData = _.uniqWith(dataValues, _.isEqual);
+        return processedData;
         // return await utils.insertData({dataValues: processedData});
     } catch (e) {
         return e

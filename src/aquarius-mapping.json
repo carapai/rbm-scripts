@@ -9,8 +9,8 @@
     "value": "Year"
   },
   "orgUnitStrategy": {
-    "value": "name",
-    "label": "name"
+    "value": "code",
+    "label": "code"
   },
   "dataElementColumn": {
     "label": "Parameter",
