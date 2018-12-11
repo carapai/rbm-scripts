@@ -7,8 +7,11 @@ module.exports.getLAM08 = period => {
         soap.createClient(url, (err, client) => {
             if (err) reject(err);
             client.getlistOfLAM08(args, (err, result) => {
-                if (err) reject(err);
-                else resolve(result['return']);
+                if (err) {
+                    resolve([]);
+                } else {
+                    resolve(result['return']);
+                }
             });
         });
     });
@@ -32,8 +35,11 @@ module.exports.getLAM09 = period => {
         soap.createClient(url, (err, client) => {
             if (err) reject(err);
             client.getValueOfLAM09(args, (err, result) => {
-                if (err) reject(err);
-                else resolve(result['return']);
+                if (err) {
+                    resolve([]);
+                } else {
+                    resolve(result['return']);
+                }
             });
         });
     });
@@ -46,8 +52,11 @@ module.exports.getLAM10 = period => {
         soap.createClient(url, (err, client) => {
             if (err) reject(err);
             client.getlistOfLAM10(args, (err, result) => {
-                if (err) reject(err);
-                else resolve(result['return']);
+                if (err) {
+                    resolve([]);
+                } else {
+                    resolve(result['return']);
+                }
             });
         });
     });
@@ -82,8 +91,11 @@ module.exports.getLAM12 = period => {
         soap.createClient(url, (err, client) => {
             if (err) reject(err);
             client.getValueOfLAM12(args, (err, result) => {
-                if (err) reject(err);
-                else resolve(result['return']);
+                if (err) {
+                    resolve([]);
+                } else {
+                    resolve(result['return']);
+                }
             });
         });
     });

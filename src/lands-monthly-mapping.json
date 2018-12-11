@@ -45,19 +45,11 @@
       ],
       "dataElements": [
         {
-          "id": "lAaRHD0OUoI",
-          "name": "LAM12 - Public Access - Female - Actual",
+          "id": "TK71erxESEv",
+          "name": "LAM12 - Total number of public accesses of the LAIS.",
           "mapping": {
             "label": "LAM12 - Public Access - Female - Actual",
             "value": "LAM12 - Public Access - Female - Actual"
-          }
-        },
-        {
-          "id": "ZqpPX9Gi9cQ",
-          "name": "LAM12 - Public Access - Male - Actual",
-          "mapping": {
-            "label": "LAM12 - Public Access - Male - Actual",
-            "value": "LAM12 - Public Access - Male - Actual"
           }
         }
       ]
