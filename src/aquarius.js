@@ -77,5 +77,5 @@ const processWaterData = async () => {
 };
 
 processWaterData().then(response => {
-    console.log(JSON.stringify(response, null, 2));
+    winston.log({level: 'info', message: JSON.stringify(response)})
 });

@@ -97,9 +97,9 @@ module.exports.getLAM12 = period => {
             client.getValueOfLAM12(args, (err, result) => {
                 if (err) {
                     winston.log({level: 'warn', message: JSON.stringify(err)});
-                    resolve({});
+                    resolve([]);
                 } else {
-                    resolve(result['return']);
+                    resolve([result['return']]);
                 }
             });
         });

@@ -1,10 +1,11 @@
 const url = require('url').URL;
 const _ = require('lodash');
 const rq = require('request-promise');
+const moment = require('moment');
 
 // TODO remove username and password from script
 const username = 'Jeric';
-    const password = '20SeraPkp8FA!18';
+const password = '20SeraPkp8FA!18';
 const dhisUrl = 'https://rbme.environment.gov.rw';
 
 const dhis2 = new url(dhisUrl);
@@ -97,4 +98,18 @@ module.exports.insertData = data => {
         json: true
     };
     return rq(options);
+};
+
+module.exports.enumerateDates = (startDate, endDate, addition, format) => {
+    const dates = [];
+
+    const currDate = moment(startDate).startOf(addition);
+    const lastDate = moment(endDate).startOf(addition);
+    dates.push(currDate.clone().format(format));
+
+    while (currDate.add(1, addition).diff(lastDate) <= 0) {
+        dates.push(currDate.clone().format(format));
+    }
+
+    return dates;
 };
