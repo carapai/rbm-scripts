@@ -7,8 +7,8 @@ const dataSet = require('./lands-monthly-mapping.json');
 
 const fmt = 'YYYYMM';
 const processMonthly = async () => {
-    // const period = moment().subtract(1, 'M').format(fmt);
-    const period = '201803';
+    const period = moment().subtract(1, 'M').format(fmt);
+    // const period = '201803';
     try {
         const allData = await soap.getLAM12(period);
         allData.organisationUnit = dataSet.organisationUnits[0]['name'];
