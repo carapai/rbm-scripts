@@ -34,6 +34,10 @@
             "PRRo9XNgpYb": {
               "label": "default",
               "value": "default"
+            },
+            "ZLFufOXe4Vx": {
+              "label": "default",
+              "value": "default"
             }
           }
         },
@@ -395,6 +399,14 @@
           "mapping": {
             "label": "LAM08",
             "value": "LAM08"
+          }
+        },
+        {
+          "id": "ZLFufOXe4Vx",
+          "name": "LAM09 - Average time taken to complete a land transfer",
+          "mapping": {
+            "label": "LAM09",
+            "value": "LAM09"
           }
         },
         {
