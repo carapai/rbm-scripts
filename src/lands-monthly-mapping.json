@@ -44,8 +44,8 @@
           "id": "TK71erxESEv",
           "name": "LAM12 - Total number of public accesses of the LAIS.",
           "mapping": {
-            "label": "LAM12 - Public Access - Female - Actual",
-            "value": "LAM12 - Public Access - Female - Actual"
+            "label": "LAM12",
+            "value": "LAM12"
           }
         }
       ]
