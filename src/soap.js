@@ -92,7 +92,7 @@ module.exports.getLAM12 = period => {
             if (err) reject(err);
             client.getValueOfLAM12(args, (err, result) => {
                 if (err) {
-                    resolve([]);
+                    resolve({});
                 } else {
                     resolve(result['return']);
                 }
