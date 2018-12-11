@@ -2,12 +2,19 @@ const _ = require('lodash');
 const moment = require('moment');
 const soap = require('./soap');
 const utils = require('./utils');
-
+const winston = require('./winston');
 const dataSet = require('./lands-monthly-mapping.json');
+
+let {
+    importDate
+} = require('./options');
 
 const fmt = 'YYYYMM';
 const processMonthly = async () => {
-    const period = moment().subtract(1, 'M').format(fmt);
+
+    let period = moment(importDate) || moment();
+
+    period = period.subtract(1, 'M').format(fmt);
     // const period = '201803';
     try {
         const allData = await soap.getLAM12(period);
@@ -20,11 +27,10 @@ const processMonthly = async () => {
             return await utils.insertData({dataValues: processedData});
         }
     } catch (e) {
-        // console.log('Error');
         return e
     }
 };
 
 processMonthly().then(response => {
-    console.log(JSON.stringify(response, null, 2));
+    winston.log({level: 'info', message: JSON.stringify(response)});
 });

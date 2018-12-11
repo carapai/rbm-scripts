@@ -1,5 +1,6 @@
 const soap = require('soap');
 const url = 'http://10.10.69.141:4740/LAISWebService/RBME?wsdl';
+const winston = require('./winston');
 
 module.exports.getLAM08 = period => {
     const args = {period: period};
@@ -8,6 +9,7 @@ module.exports.getLAM08 = period => {
             if (err) reject(err);
             client.getlistOfLAM08(args, (err, result) => {
                 if (err) {
+                    winston.log({level: 'warn', message: JSON.stringify(err)});
                     resolve([]);
                 } else {
                     resolve(result['return']);
@@ -36,6 +38,7 @@ module.exports.getLAM09 = period => {
             if (err) reject(err);
             client.getValueOfLAM09(args, (err, result) => {
                 if (err) {
+                    winston.log({level: 'warn', message: JSON.stringify(err)});
                     resolve([]);
                 } else {
                     resolve(result['return']);
@@ -53,6 +56,7 @@ module.exports.getLAM10 = period => {
             if (err) reject(err);
             client.getlistOfLAM10(args, (err, result) => {
                 if (err) {
+                    winston.log({level: 'warn', message: JSON.stringify(err)});
                     resolve([]);
                 } else {
                     resolve(result['return']);
@@ -92,6 +96,7 @@ module.exports.getLAM12 = period => {
             if (err) reject(err);
             client.getValueOfLAM12(args, (err, result) => {
                 if (err) {
+                    winston.log({level: 'warn', message: JSON.stringify(err)});
                     resolve({});
                 } else {
                     resolve(result['return']);

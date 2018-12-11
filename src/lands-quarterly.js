@@ -4,16 +4,23 @@ const moment = require('moment');
 
 const soap = require('./soap');
 const utils = require('./utils');
+const winston = require('./winston');
 
 
 const dataSet = require('./lands-quarterly-mapping.json');
 
 const fmt = 'Y[Q]Q';
 
+let {
+    importDate
+} = require('./options');
+
 
 const processQuarterly = async () => {
 
-    const period = moment().subtract(1, 'Q').format(fmt);
+    let period = moment(importDate) || moment();
+
+    period = period.subtract(1, 'Q').format(fmt);
 
     try {
         // const lam07Data = await soap.getLAM07(period);
@@ -44,5 +51,5 @@ const processQuarterly = async () => {
 };
 
 processQuarterly().then(response => {
-    console.log(JSON.stringify(response));
+    winston.log({level: 'info', message: JSON.stringify(response)});
 });
