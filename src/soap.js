@@ -19,6 +19,7 @@ module.exports.getLAM08 = period => {
     });
 };
 
+/*
 module.exports.getLAM07 = period => {
     const args = {period: period};
     return new Promise((resolve, reject) => {
@@ -29,6 +30,7 @@ module.exports.getLAM07 = period => {
         });
     });
 };
+*/
 
 
 module.exports.getLAM09 = period => {
@@ -66,8 +68,25 @@ module.exports.getLAM10 = period => {
     });
 };
 
+module.exports.getLAM10Denominator = period => {
+    const args = {period: period};
+    return new Promise((resolve, reject) => {
+        soap.createClient(url, (err, client) => {
+            if (err) reject(err);
+            client.getDenominatorOfLAM10(args, (err, result) => {
+                if (err) {
+                    winston.log({level: 'warn', message: JSON.stringify(err)});
+                    resolve([]);
+                } else {
+                    resolve(result['return']);
+                }
+            });
+        });
+    });
+};
 
-module.exports.getLAM24 = period => {
+
+/*module.exports.getLAM24 = period => {
     const args = {period: period};
     return new Promise((resolve, reject) => {
         soap.createClient(url, (err, client) => {
@@ -87,7 +106,7 @@ module.exports.getLAM25 = period => {
             resolve([]);
         });
     });
-};
+};*/
 
 module.exports.getLAM12 = period => {
     const args = {period: period};

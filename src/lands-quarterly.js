@@ -37,6 +37,11 @@ const processQuarterly = async () => {
                 return {...d, categoryOptioncombo: 'default'}
             });
             const lam10Data = await soap.getLAM10(period);
+            let lam10DataDenominator = await soap.getLAM10Denominator(period);
+
+            lam10DataDenominator = lam10DataDenominator.map(d => {
+                return {...d, categoryOptioncombo: 'default', code: 'LAM101'}
+            });
             // const lam24Data = await soap.getLAM24(period);
             // const lam25Data = await soap.getLAM25(period);
 
@@ -45,6 +50,7 @@ const processQuarterly = async () => {
                 ...lam08Data,
                 ...lam09Data,
                 ...lam10Data,
+                ...lam10DataDenominator
                 // ...lam24Data,
                 // ...lam25Data
             ];
