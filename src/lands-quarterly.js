@@ -28,9 +28,10 @@ const processQuarterly = async () => {
         periods = [period]
     }
 
+    let data = [];
+
     periods.forEach(async period => {
         try {
-            // const lam07Data = await soap.getLAM07(period);
             const lam08Data = await soap.getLAM08(period);
             let lam09Data = await soap.getLAM09(period);
             lam09Data = lam09Data.map(d => {
@@ -42,27 +43,26 @@ const processQuarterly = async () => {
             lam10DataDenominator = lam10DataDenominator.map(d => {
                 return {...d, categoryOptioncombo: 'default', code: 'LAM101'}
             });
-            // const lam24Data = await soap.getLAM24(period);
-            // const lam25Data = await soap.getLAM25(period);
 
-            const allData = [
-                // ...lam07Data,
+            data = [...data,
                 ...lam08Data,
                 ...lam09Data,
                 ...lam10Data,
                 ...lam10DataDenominator
-                // ...lam24Data,
-                // ...lam25Data
             ];
-
-            const dataValues = utils.processData(dataSet, allData);
-            const processedData = _.uniqWith(dataValues, _.isEqual);
-            return await utils.insertData({dataValues: processedData});
         } catch (e) {
-            return e
+            winston.log({level: 'info', message: JSON.stringify(e)});
+            // return e
         }
     });
 
+    /*try {
+        const dataValues = utils.processData(dataSet, data);
+        const processedData = _.uniqWith(dataValues, _.isEqual);
+        return await utils.insertData({dataValues: processedData});
+    } catch (e) {
+        return e;
+    }*/
 
 };
 
