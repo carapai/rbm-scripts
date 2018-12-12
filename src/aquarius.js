@@ -46,7 +46,7 @@ const fmt = 'Y[July]';
 const processWaterData = async () => {
     let periods = [];
     if (fromDate && toDate) {
-        periods = utils.enumerateDates(moment(fromDate), moment(toDate), 'year', fmt)
+        periods = utils.enumerateDates(fromDate, toDate, 'year', fmt)
     } else {
         const year = moment().year();
         const period = year - 1 + 'July';

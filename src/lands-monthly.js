@@ -16,7 +16,7 @@ const processMonthly = async () => {
     let periods = [];
 
     if (fromDate && toDate) {
-        periods = utils.enumerateDates(moment(fromDate), moment(toDate), 'M', fmt)
+        periods = utils.enumerateDates(fromDate, toDate, 'M', fmt)
     } else {
         const period = moment().subtract(1, 'M').format(fmt);
         periods = [period]

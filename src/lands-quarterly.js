@@ -22,7 +22,7 @@ const processQuarterly = async () => {
     let periods = [];
 
     if (fromDate && toDate) {
-        periods = utils.enumerateDates(moment(fromDate), moment(toDate), 'Q', fmt)
+        periods = utils.enumerateDates(fromDate, toDate, 'Q', fmt)
     } else {
         const period = moment().subtract(1, 'Q').format(fmt);
         periods = [period]
