@@ -56,6 +56,8 @@ const processQuarterly = async () => {
         }
     });
 
+    console.log(data);
+
     /*try {
         const dataValues = utils.processData(dataSet, data);
         const processedData = _.uniqWith(dataValues, _.isEqual);
