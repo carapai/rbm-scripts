@@ -30,7 +30,9 @@ const processQuarterly = async () => {
 
     let data = [];
 
-    periods.forEach(async period => {
+    console.log(periods);
+
+    /*periods.forEach(async period => {
         try {
             const lam08Data = await soap.getLAM08(period);
             let lam09Data = await soap.getLAM09(period);
@@ -54,7 +56,7 @@ const processQuarterly = async () => {
             winston.log({level: 'info', message: JSON.stringify(e)});
             // return e
         }
-    });
+    });*/
 
     console.log(data);
 
