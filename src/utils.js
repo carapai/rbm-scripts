@@ -104,7 +104,7 @@ module.exports.enumerateDates = (startDate, endDate, addition, format) => {
     const currDate = moment(startDate).startOf(addition);
     const lastDate = moment(endDate).startOf(addition);
     dates.push(currDate.clone().format(format));
-    while (currDate.add(1, addition).diff(lastDate) <= 0) {
+    while (currDate.add(1, addition).diff(lastDate) < 0) {
         dates.push(currDate.clone().format(format));
     }
     return dates;
