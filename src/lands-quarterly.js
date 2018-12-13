@@ -28,9 +28,7 @@ const processQuarterly = async () => {
         periods = [period]
     }
 
-    let data = [];
-
-    periods.forEach(async period => {
+   /* periods.forEach(async period => {
         try {
             const lam08Data = await soap.getLAM08(period);
             let lam09Data = await soap.getLAM09(period);
@@ -54,9 +52,34 @@ const processQuarterly = async () => {
             winston.log({level: 'info', message: JSON.stringify(e)});
             // return e
         }
-    });
+    });*/
 
-   return data;
+    try {
+        const lam08Data = await soap.getLAM08(periods);
+        let lam09Data = await soap.getLAM09(periods);
+        lam09Data = lam09Data.map(d => {
+            return {...d, categoryOptioncombo: 'default'}
+        });
+        const lam10Data = await soap.getLAM10(periods);
+        let lam10DataDenominator = await soap.getLAM10Denominator(periods);
+
+        lam10DataDenominator = lam10DataDenominator.map(d => {
+            return {...d, categoryOptioncombo: 'default', code: 'LAM101'}
+        });
+
+       const data = [...data,
+            ...lam08Data,
+            ...lam09Data,
+            ...lam10Data,
+            ...lam10DataDenominator
+        ];
+        return data;
+
+    } catch (e) {
+        // winston.log({level: 'info', message: JSON.stringify(e)});
+        return e
+    }
+
 
     /*try {
         const dataValues = utils.processData(dataSet, data);
