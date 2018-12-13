@@ -28,6 +28,36 @@ const processQuarterly = async () => {
         periods = [period]
     }
 
+    const allLam08Data = periods.map(async period => {
+        // try {
+            /*let lam09Data = await soap.getLAM09(period);
+            lam09Data = lam09Data.map(d => {
+                return {...d, categoryOptioncombo: 'default'}
+            });
+            const lam10Data = await soap.getLAM10(period);
+            let lam10DataDenominator = await soap.getLAM10Denominator(period);
+
+            lam10DataDenominator = lam10DataDenominator.map(d => {
+                return {...d, categoryOptioncombo: 'default', code: 'LAM101'}
+            });
+
+            data = [...data,
+                ...lam08Data,
+                ...lam09Data,
+                ...lam10Data,
+                ...lam10DataDenominator
+            ];*/
+
+        return soap.getLAM08(period);
+        /*} catch (e) {
+            winston.log({level: 'info', message: JSON.stringify(e)});
+            // return e
+        }*/
+    });
+   const lam08Data = await Promise.all(allLam08Data);
+
+   return lam08Data;
+
    /* periods.forEach(async period => {
         try {
             const lam08Data = await soap.getLAM08(period);
