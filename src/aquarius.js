@@ -52,7 +52,6 @@ const processWaterData = async () => {
         const period = year - 1 + 'July';
         periods = [period];
     }
-
     let responses = [];
     try {
         let data = await downloadData('GetDataSetsList', {});
@@ -92,7 +91,6 @@ const processWaterData = async () => {
 
             if (processed.length > 0) {
                 const dataValues = utils.processData(dataSet, processed);
-
                 const response = utils.insertData({dataValues});
                 responses = [...responses, response];
             }
@@ -101,7 +99,6 @@ const processWaterData = async () => {
     } catch (e) {
         responses = [...responses, e];
     }
-
     return responses;
 };
 
