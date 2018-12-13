@@ -80,7 +80,7 @@ const processQuarterly = async () => {
         const processedData = _.uniqWith(dataValues, _.isEqual);
         return await utils.insertData({dataValues: processedData});*/
 
-       return lam10DataDenominator;
+       return data;
 
     } catch (e) {
         return e;
