@@ -80,8 +80,8 @@ module.exports.getLAM10Denominator = period => {
                 } else {
                     const data = result['return'].map(d => {
                         return {...d, period}
-                    })
-                    resolve();
+                    });
+                    resolve(data);
                 }
             });
         });
