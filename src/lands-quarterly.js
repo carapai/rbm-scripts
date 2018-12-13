@@ -56,7 +56,8 @@ const processQuarterly = async () => {
 
     try {
         const lam08Data = await soap.getLAM08(periods);
-        let lam09Data = await soap.getLAM09(periods);
+        console.log(lam08Data);
+        /*let lam09Data = await soap.getLAM09(periods);
         lam09Data = lam09Data.map(d => {
             return {...d, categoryOptioncombo: 'default'}
         });
@@ -73,7 +74,7 @@ const processQuarterly = async () => {
             ...lam10Data,
             ...lam10DataDenominator
         ];
-        return data;
+        return data;*/
 
     } catch (e) {
         // winston.log({level: 'info', message: JSON.stringify(e)});
