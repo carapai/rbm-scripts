@@ -22,23 +22,32 @@ const processMonthly = async () => {
         periods = [period]
     }
 
-    periods.forEach(async period => {
+    let data = [];
 
-        try {
-            let allData = await soap.getLAM12(period);
+    try {
+        const allLam12Data = periods.map(period => {
+            return soap.getLAM12(period);
+        });
 
-            allData = allData.map(d => {
-                return {...d, organisationUnit: dataSet.organisationUnits[0]['name'], categoryOptioncombo: 'default'}
+        const lam12Data = await Promise.all(allLam12Data);
+
+
+        lam12Data.forEach(d1 => {
+            d1.forEach(d => {
+                data = [...data, {
+                    ...d,
+                    organisationUnit: dataSet.organisationUnits[0]['name'],
+                    categoryOptioncombo: 'default'
+                }];
             });
+        });
 
-            const dataValues = utils.processData(dataSet, allData);
-            const processedData = _.uniqWith(dataValues, _.isEqual);
-            return await utils.insertData({dataValues: processedData});
-
-        } catch (e) {
-            return e
-        }
-    });
+        const dataValues = utils.processData(dataSet, data);
+        const processedData = _.uniqWith(dataValues, _.isEqual);
+        return await utils.insertData({dataValues: processedData});
+    } catch (e) {
+        return e
+    }
 };
 
 processMonthly().then(response => {

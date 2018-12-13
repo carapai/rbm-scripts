@@ -31,20 +31,20 @@ const processQuarterly = async () => {
     }
 
     try {
-        const allLam08Data = periods.map(async period => {
+        const allLam08Data = periods.map(period => {
             return soap.getLAM08(period);
         });
 
-        const allLam09Data = periods.map(async period => {
+        const allLam09Data = periods.map(period => {
             return soap.getLAM09(period);
         });
 
-        const allLam10Data = periods.map(async period => {
+        const allLam10Data = periods.map(period => {
             return soap.getLAM10(period);
 
         });
 
-        const allLam10DenominatorData = periods.map(async period => {
+        const allLam10DenominatorData = periods.map(period => {
             return soap.getLAM10Denominator(period);
         });
 
