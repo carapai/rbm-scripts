@@ -21,6 +21,8 @@ const processQuarterly = async () => {
 
     let periods = [];
 
+    let data = [];
+
     if (fromDate && toDate) {
         periods = utils.enumerateDates(fromDate, toDate, 'Q', fmt)
     } else {
@@ -28,97 +30,60 @@ const processQuarterly = async () => {
         periods = [period]
     }
 
-    const allLam08Data = periods.map(async period => {
-        // try {
-            /*let lam09Data = await soap.getLAM09(period);
-            lam09Data = lam09Data.map(d => {
-                return {...d, categoryOptioncombo: 'default'}
-            });
-            const lam10Data = await soap.getLAM10(period);
-            let lam10DataDenominator = await soap.getLAM10Denominator(period);
-
-            lam10DataDenominator = lam10DataDenominator.map(d => {
-                return {...d, categoryOptioncombo: 'default', code: 'LAM101'}
-            });
-
-            data = [...data,
-                ...lam08Data,
-                ...lam09Data,
-                ...lam10Data,
-                ...lam10DataDenominator
-            ];*/
-
-        return soap.getLAM08(period);
-        /*} catch (e) {
-            winston.log({level: 'info', message: JSON.stringify(e)});
-            // return e
-        }*/
-    });
-   const lam08Data = await Promise.all(allLam08Data);
-
-   return lam08Data;
-
-   /* periods.forEach(async period => {
-        try {
-            const lam08Data = await soap.getLAM08(period);
-            let lam09Data = await soap.getLAM09(period);
-            lam09Data = lam09Data.map(d => {
-                return {...d, categoryOptioncombo: 'default'}
-            });
-            const lam10Data = await soap.getLAM10(period);
-            let lam10DataDenominator = await soap.getLAM10Denominator(period);
-
-            lam10DataDenominator = lam10DataDenominator.map(d => {
-                return {...d, categoryOptioncombo: 'default', code: 'LAM101'}
-            });
-
-            data = [...data,
-                ...lam08Data,
-                ...lam09Data,
-                ...lam10Data,
-                ...lam10DataDenominator
-            ];
-        } catch (e) {
-            winston.log({level: 'info', message: JSON.stringify(e)});
-            // return e
-        }
-    });*/
-
     try {
-        const lam08Data = await soap.getLAM08(periods);
-        console.log(lam08Data);
-        /*let lam09Data = await soap.getLAM09(periods);
-        lam09Data = lam09Data.map(d => {
-            return {...d, categoryOptioncombo: 'default'}
-        });
-        const lam10Data = await soap.getLAM10(periods);
-        let lam10DataDenominator = await soap.getLAM10Denominator(periods);
-
-        lam10DataDenominator = lam10DataDenominator.map(d => {
-            return {...d, categoryOptioncombo: 'default', code: 'LAM101'}
+        const allLam08Data = periods.map(async period => {
+            return soap.getLAM08(period);
         });
 
-       const data = [...data,
-            ...lam08Data,
-            ...lam09Data,
-            ...lam10Data,
-            ...lam10DataDenominator
-        ];
-        return data;*/
+        const allLam09Data = periods.map(async period => {
+            return soap.getLAM09(period);
+        });
 
-    } catch (e) {
-        // winston.log({level: 'info', message: JSON.stringify(e)});
-        return e
-    }
+        const allLam10Data = periods.map(async period => {
+            return soap.getLAM10(period);
+
+        });
+
+        const allLam10DenominatorData = periods.map(async period => {
+            return soap.getLAM10Denominator(period);
+        });
 
 
-    /*try {
+        const lam08Data = await Promise.all(allLam08Data);
+        const lam09Data = await Promise.all(allLam09Data);
+        const lam10Data = await Promise.all(allLam10Data);
+        const lam10DataDenominator = await Promise.all(allLam10DenominatorData);
+
+        lam08Data.forEach(d => {
+            data = [...data, ...d];
+        });
+
+        lam09Data.forEach(d1 => {
+            d1.forEach(d => {
+                data = [...data, {...d, categoryOptioncombo: 'default'}];
+            });
+        });
+
+        lam10Data.forEach(d => {
+            data = [...data, ...d];
+        });
+
+
+        lam10DataDenominator.forEach(d1 => {
+            d1.forEach(d => {
+                data = [...data, {...d, categoryOptioncombo: 'default', code: 'LAM101'}];
+            });
+        });
+
+
         const dataValues = utils.processData(dataSet, data);
         const processedData = _.uniqWith(dataValues, _.isEqual);
         return await utils.insertData({dataValues: processedData});
+
     } catch (e) {
         return e;
-    }*/
+    }
+
 
 };
 
