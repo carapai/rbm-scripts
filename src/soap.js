@@ -73,7 +73,7 @@ module.exports.getLAM10Denominator = period => {
     return new Promise((resolve, reject) => {
         soap.createClient(url, (err, client) => {
             if (err) reject(err);
-            client.getDenominatorOfLAM10({}, (err, result) => {
+            client.getDenominatorOfLAM10((err, result) => {
                 if (err) {
                     winston.log({level: 'warn', message: JSON.stringify(err)});
                     resolve([]);
