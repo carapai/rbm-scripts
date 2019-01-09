@@ -44,15 +44,15 @@ const processQuarterly = async () => {
 
         // });
 
-        const allLam10DenominatorData = periods.map(period => {
-            return soap.getLAM10Denominator(period);
-        });
+        // const allLam10DenominatorData = periods.map(period => {
+        //     return soap.getLAM10Denominator(period);
+        // });
 
 
         // const lam08Data = await Promise.all(allLam08Data);
         // const lam09Data = await Promise.all(allLam09Data);
         // const lam10Data = await Promise.all(allLam10Data);
-        const lam10DataDenominator = await Promise.all(allLam10DenominatorData);
+        const lam10DataDenominator = await soap.getLAM10Denominator(period);
 
         // lam08Data.forEach(d => {
         //     data = [...data, ...d];
