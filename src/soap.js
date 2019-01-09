@@ -78,6 +78,7 @@ module.exports.getLAM10Denominator = period => {
                     winston.log({level: 'warn', message: JSON.stringify(err)});
                     resolve([]);
                 } else {
+                    console.log('We are hear');
                     const data = result['return'].map(d => {
                         return {...d, period}
                     });
