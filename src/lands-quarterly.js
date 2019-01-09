@@ -31,42 +31,42 @@ const processQuarterly = async () => {
     }
 
     try {
-        const allLam08Data = periods.map(period => {
-            return soap.getLAM08(period);
-        });
+        // const allLam08Data = periods.map(period => {
+        //     return soap.getLAM08(period);
+        // });
 
-        const allLam09Data = periods.map(period => {
-            return soap.getLAM09(period);
-        });
+        // const allLam09Data = periods.map(period => {
+        //     return soap.getLAM09(period);
+        // });
 
-        const allLam10Data = periods.map(period => {
-            return soap.getLAM10(period);
+        // const allLam10Data = periods.map(period => {
+        //     return soap.getLAM10(period);
 
-        });
+        // });
 
         const allLam10DenominatorData = periods.map(period => {
             return soap.getLAM10Denominator(period);
         });
 
 
-        const lam08Data = await Promise.all(allLam08Data);
-        const lam09Data = await Promise.all(allLam09Data);
-        const lam10Data = await Promise.all(allLam10Data);
+        // const lam08Data = await Promise.all(allLam08Data);
+        // const lam09Data = await Promise.all(allLam09Data);
+        // const lam10Data = await Promise.all(allLam10Data);
         const lam10DataDenominator = await Promise.all(allLam10DenominatorData);
 
-        lam08Data.forEach(d => {
-            data = [...data, ...d];
-        });
+        // lam08Data.forEach(d => {
+        //     data = [...data, ...d];
+        // });
 
-        lam09Data.forEach(d1 => {
-            d1.forEach(d => {
-                data = [...data, {...d, categoryOptioncombo: 'default'}];
-            });
-        });
+        // lam09Data.forEach(d1 => {
+        //     d1.forEach(d => {
+        //         data = [...data, {...d, categoryOptioncombo: 'default'}];
+        //     });
+        // });
 
-        lam10Data.forEach(d => {
-            data = [...data, ...d];
-        });
+        // lam10Data.forEach(d => {
+        //     data = [...data, ...d];
+        // });
 
 
         lam10DataDenominator.forEach(d1 => {
@@ -76,9 +76,10 @@ const processQuarterly = async () => {
         });
 
 
-        const dataValues = utils.processData(dataSet, data);
-        const processedData = _.uniqWith(dataValues, _.isEqual);
-        return await utils.insertData({dataValues: processedData});
+        // const dataValues = utils.processData(dataSet, data);
+        // const processedData = _.uniqWith(dataValues, _.isEqual);
+        return data;
+        // return await utils.insertData({dataValues: processedData});
 
     } catch (e) {
         return e;
